@@ -2,7 +2,7 @@ require 'awesome_print'
 require 'pry'
 require_relative 'lib/adagrams'
 
-pool = {
+POOL = {
   A: 9,
   B: 2,
   C: 2,
@@ -31,13 +31,6 @@ pool = {
   Z: 1
 }
 
-letter_array = []
-pool.each do |letter, qty|
-   qty.times do
-    letter_array << letter.to_s
-  end
-end
-
 def display_welcome_message
   puts "Welcome to Adagrams!"
   puts "Let's draw 10 letters from the letter pool..."
@@ -49,14 +42,23 @@ def display_drawn_letters(letters)
 end
 
 def draw_letters
-  return ["A", "B", "C"]
+  letter_array = []
+  ten_letters = []
+  POOL.each do |letter, qty|
+     qty.times do
+      letter_array << letter.to_s
+    end
+  end
+
+10.times do
+  ten_letters << letter_array.shuffle!.pop
+end
+  return ten_letters
 end
 
 def run_game
   display_welcome_message
   display_drawn_letters(draw_letters)
 end
-
-
 
 run_game
