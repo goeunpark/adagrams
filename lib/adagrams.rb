@@ -30,6 +30,11 @@ POOL = {
   Z: 1
 }
 
+def uses_available_letters?(input, letters_in_hand)
+ return input.chars.all? { |char| letters_in_hand.include?(char) }
+end
+
+
 def draw_letters
   ten_letters = []
   all_letters = generate_letter_array(POOL)
