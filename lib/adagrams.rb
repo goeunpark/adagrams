@@ -31,9 +31,14 @@ POOL = {
 }
 
 def uses_available_letters?(input, letters_in_hand)
- return input.chars.all? { |char| letters_in_hand.include?(char) }
+  input.chars.each do |char|
+    unless letters_in_hand.include?(char)
+      return false
+    end
+    letters_in_hand.delete(char)
+  end
+  return true
 end
-
 
 def draw_letters
   ten_letters = []
