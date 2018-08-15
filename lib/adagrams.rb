@@ -20,24 +20,21 @@ def highest_score_from( unscored_words )
 
 
     elsif score == highest_score
-      if word.length < best_word[:word].length
-
-      
-
-
+      if best_word[:word].length == 10
+        return best_word
+      elsif word.length == 10
         best_word = {word: word, score: highest_score}
+        return best_word
+      elsif word.length < best_word[:word].length
+        best_word = {word: word, score: highest_score}
+        return best_word
+      elsif word.length == best_word[:word].length
         return best_word
       end
     end
-
-
-
   end
   return best_word
 end
-
-
-
 
 def score_word(word)
   total_points = []
