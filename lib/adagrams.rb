@@ -5,27 +5,36 @@ POOL = { A: 9, B: 2, C: 2, D: 4, E: 12, F: 2, G: 3, H: 2, I: 9, J: 1, K: 1, L: 4
 
 SCORE_CHART = { A: 1, B: 3, C: 3, D: 2, E: 1, F: 4, G: 2, H: 4, I: 1, J: 8, K: 5, L: 1, M: 3, N: 1, O: 1, P: 3, Q: 10, R: 1, S: 1, T: 1, U: 1, V: 4, W: 4, X: 8, Y: 4, Z: 10 }
 
-# Array_of_words each word
-# highest_score = 0
-# score_word (word)
-# if score_word(word) > highest_score
-# highest_score = score_word(word)
-# winning_word = {word: highest_score}
-# elsif score_word == highest_score
-  # if length == to each other
-    # return first word
-  # end
+def highest_score_from( unscored_words )
+
+  highest_score = 0
+  best_word = nil
+
+  unscored_words.each do |word|
+
+    score = score_word(word)
+
+    if score > highest_score
+      highest_score = score
+      best_word = {word: word, score: highest_score}
 
 
-  # if legnth is smallest
-    #unless length == 10
-    # return this word
-    #end
-    #return smallest
-    #end
+    elsif score == highest_score
+      if word.length < best_word[:word].length
 
-# end
+      
 
+
+        best_word = {word: word, score: highest_score}
+        return best_word
+      end
+    end
+
+
+
+  end
+  return best_word
+end
 
 
 
