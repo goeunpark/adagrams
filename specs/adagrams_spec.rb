@@ -9,12 +9,12 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 describe 'Adagrams' do
   describe 'draw_letters method' do
-    it 'draws ten letters from the letter pool' do
+    xit 'draws ten letters from the letter pool' do
       drawn_letters = draw_letters
       expect(drawn_letters.size).must_equal 10
     end
 
-    it 'returns an array, and each item is a single-letter string' do
+    xit 'returns an array, and each item is a single-letter string' do
       drawn_letters = draw_letters
       expect(drawn_letters.size).must_equal 10
 
@@ -82,7 +82,7 @@ describe 'Adagrams' do
   end
 
   describe 'highest_score_from method' do
-    xit 'returns a hash that contains the word and score of best word in an array' do
+    it 'returns a hash that contains the word and score of best word in an array' do
       words = ['X', 'XX', 'XXX', 'XXXX']
       best_word = highest_score_from words
 
