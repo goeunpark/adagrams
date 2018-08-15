@@ -7,12 +7,19 @@ SCORE_CHART = { A: 1, B: 3, C: 3, D: 2, E: 1, F: 4, G: 2, H: 4, I: 1, J: 8, K: 5
 
 def score_word(word)
   total_points = []
-  SCORE_CHART.each {|letter,letter_points|
-    if word.downcase.include?(letter.to_s.downcase)
-      total_points << letter_points
+  SCORE_CHART.each { |letter, letter_points|
+    word.each_char do |char|
+      if char.downcase.include?(letter.to_s.downcase)
+        total_points << letter_points
+      end
     end
   }
-  return total_points.sum
+
+  if total_points.length >= 7
+    return total_points.sum + 8
+  else
+    return total_points.sum
+  end
 end
 
 def uses_available_letters?(input, letters_in_hand)
@@ -44,4 +51,4 @@ def generate_letter_array(pool)
   return letter_array
 end
 
-score_word('DOG')
+# p score_word('XAXXXXXX')
