@@ -4,6 +4,8 @@ require 'minitest/skip_dsl'
 
 require_relative '../lib/adagrams'
 
+require 'pry'
+
 # Get that nice colorized output
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
@@ -26,7 +28,7 @@ describe 'Adagrams' do
     end
   end
 
-   describe 'uses_available_letters? method' do
+  describe 'uses_available_letters? method' do
 
     it 'returns true if the submitted letters are valid against the drawn letters' do
       drawn_letters = ['D', 'O', 'G', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
@@ -84,7 +86,9 @@ describe 'Adagrams' do
   describe 'highest_score_from method' do
     it 'returns a hash that contains the word and score of best word in an array' do
       words = ['X', 'XX', 'XXX', 'XXXX']
-      best_word = highest_score_from words
+      best_word = highest_score_from(words)
+
+      # binding.pry
 
       expect(best_word[:word]).must_equal 'XXXX'
       expect(best_word[:score]).must_equal 32
@@ -101,6 +105,9 @@ describe 'Adagrams' do
     it 'in case of tied score, prefers the word with fewer letters' do
       # the character 'M' is worth 3 points, 'W' is 4 points
       words = ['MMMM', 'WWW']
+
+      best_word = highest_score_from(words)
+
 
       # verify both have a score of 12
       expect(score_word(words.first)).must_equal 12
