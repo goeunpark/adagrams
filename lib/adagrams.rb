@@ -23,18 +23,35 @@ def highest_score_from(unscored_words)
     all_scores[word] = score_word(word)
   end
 
-  max_words = all_scores.select {|word,score| score == all_scores.values.max }
+  max_words = all_scores.select {|word, score| score == all_scores.values.max }
+
+  first_word = max_words.keys[0]
+  first_word_score = max_words.values[0]
 
   case
   when max_words.size == 1
-    best_word = {word: max_words.keys.join, score: max_words.values.join.to_i}
+    best_word = {
+      word: first_word,
+      score: first_word_score
+    }
 
   when max_words.any? { |word, score| word.length == 10 }
-    best_word = {word: max_words.select {|word, score| word.length == 10 }.keys[0], score: max_words.select {|word, score| word.length == 10 }.values[0]}
+    first_word = max_words.select { |word, score| word.length == 10 }.keys[0]
+
+    best_word = {
+      word: first_word,
+      score: first_word_score
+    }
 
   else
-    best_word = {word: max_words.min_by{|word, score| word.length}[0] , score: max_words.min_by{|word, score| word.length}[1]}
+    first_word = max_words.min_by{ |word, score| word.length }[0]
+
+    best_word = {
+      word: first_word,
+      score: first_word_score
+    }
   end
+
   return best_word
 end
 
