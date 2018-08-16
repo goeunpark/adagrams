@@ -5,33 +5,26 @@ POOL = { A: 9, B: 2, C: 2, D: 4, E: 12, F: 2, G: 3, H: 2, I: 9, J: 1, K: 1, L: 4
 
 SCORE_CHART = { A: 1, B: 3, C: 3, D: 2, E: 1, F: 4, G: 2, H: 4, I: 1, J: 8, K: 5, L: 1, M: 3, N: 1, O: 1, P: 3, Q: 10, R: 1, S: 1, T: 1, U: 1, V: 4, W: 4, X: 8, Y: 4, Z: 10 }
 
-def highest_score_from( unscored_words )
 
-  highest_score = 0
-  best_word = nil
+def highest_score_from(unscored_words)
+
+  all_scores = {}
 
   unscored_words.each do |word|
+    all_scores[word] = score_word(word)
+  end
 
-    score = score_word(word)
+  max_words = all_scores.select {|word,score| score == all_scores.values.max }
 
-    if score > highest_score
-      highest_score = score
-      best_word = {word: word, score: highest_score}
+  case
+  when max_words.size == 1
+    best_word = {word: max_words.keys.join, score: max_words.values.join.to_i}
 
+  when max_words.any? { |word, score| word.length == 10 }
+    best_word = {word: max_words.select {|word, score| word.length == 10 }.keys[0], score: max_words.select {|word, score| word.length == 10 }.values[0]}
 
-    elsif score == highest_score
-      if best_word[:word].length == 10
-        return best_word
-      elsif word.length == 10
-        best_word = {word: word, score: highest_score}
-        return best_word
-      elsif word.length < best_word[:word].length
-        best_word = {word: word, score: highest_score}
-        return best_word
-      elsif word.length == best_word[:word].length
-        return best_word
-      end
-    end
+  else
+    best_word = {word: max_words.min_by{|word, score| word.length}[0] , score: max_words.min_by{|word, score| word.length}[1]}
   end
   return best_word
 end
@@ -81,3 +74,6 @@ def generate_letter_array(pool)
   end
   return letter_array
 end
+
+words = ['AAAAAAAAAA', 'EEEEEEEEEE']
+highest_score_from(words)
