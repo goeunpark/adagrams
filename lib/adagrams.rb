@@ -73,6 +73,3 @@ def generate_letter_array(pool)
   end
   return letter_array
 end
-
-words = ['AAAAAAAAAA', 'EEEEEEEEEE']
-highest_score_from(words)
