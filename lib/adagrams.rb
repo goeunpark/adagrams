@@ -10,9 +10,7 @@ SCORE_CHART = { A: 1, B: 3, C: 3, D: 2, E: 1, F: 4, G: 2, H: 4, I: 1, J: 8, K: 5
 def is_in_english_dict?(input)
   CSV.open("../assets/dictionary-english.csv", "r").each do |word|
 
-    if word.include?(input)
-      return true
-    end
+    return true if word.include?(input)
   end
   return false
 end
@@ -85,3 +83,6 @@ def generate_letter_array(pool)
   end
   return letter_array
 end
+
+
+p is_in_english_dict?('0')
