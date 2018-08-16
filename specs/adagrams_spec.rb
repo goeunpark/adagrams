@@ -185,10 +185,17 @@ describe 'Adagrams' do
     end
 
     it 'checks that the input is not in the dictionary' do
-      
+
       word = 'dogg'
 
       is_in_english_dict?(word).must_equal false
+    end
+
+    it 'takes in english words regardless of case' do
+
+      word = 'gReAt'
+
+      is_in_english_dict?(word).must_equal true
     end
   end
 
