@@ -69,13 +69,9 @@ def score_word(word)
 end
 
 def uses_available_letters?(input, letters_in_hand)
-  input.chars.each do |char|
-    unless letters_in_hand.include?(char)
-      return false
-    end
-    letters_in_hand.delete(char)
-  end
-  return true
+  input = input.chars
+
+  (input & letters_in_hand) == input ? true : false
 end
 
 def draw_letters
@@ -96,3 +92,5 @@ def generate_letter_array(pool)
   end
   return letter_array
 end
+
+uses_available_letters?('CAT', ['A', 'B', 'C', 'T', 'S'])
