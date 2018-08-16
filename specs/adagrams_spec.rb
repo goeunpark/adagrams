@@ -9,12 +9,12 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 describe 'Adagrams' do
   describe 'draw_letters method' do
-    xit 'draws ten letters from the letter pool' do
+    it 'draws ten letters from the letter pool' do
       drawn_letters = draw_letters
       expect(drawn_letters.size).must_equal 10
     end
 
-    xit 'returns an array, and each item is a single-letter string' do
+    it 'returns an array, and each item is a single-letter string' do
       drawn_letters = draw_letters
       expect(drawn_letters.size).must_equal 10
 
@@ -28,7 +28,7 @@ describe 'Adagrams' do
 
    describe 'uses_available_letters? method' do
 
-    xit 'returns true if the submitted letters are valid against the drawn letters' do
+    it 'returns true if the submitted letters are valid against the drawn letters' do
       drawn_letters = ['D', 'O', 'G', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
       test_word = 'DOG'
 
@@ -37,7 +37,7 @@ describe 'Adagrams' do
       expect(is_valid).must_equal true
     end
 
-    xit 'returns false word contains letters not in the drawn letters' do
+    it 'returns false word contains letters not in the drawn letters' do
       drawn_letters = ['D', 'O', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
       test_word = 'DOG'
 
@@ -46,7 +46,7 @@ describe 'Adagrams' do
       expect(is_valid).must_equal false
     end
 
-    xit 'returns false word contains repeated letters more than in the drawn letters' do
+    it 'returns false word contains repeated letters more than in the drawn letters' do
       drawn_letters = ['A', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
       test_word = 'AAA'
 
@@ -58,23 +58,23 @@ describe 'Adagrams' do
   end
 
   describe 'score_word method' do
-    xit 'returns an accurate numerical score according to the score chart' do
+    it 'returns an accurate numerical score according to the score chart' do
       expect(score_word("A")).must_equal 1
       expect(score_word("DOG")).must_equal 5
       expect(score_word("WHIMSY")).must_equal 17
     end
 
-    xit 'returns a score regardless of input case' do
+    it 'returns a score regardless of input case' do
       expect(score_word("a")).must_equal 1
       expect(score_word("dog")).must_equal 5
       expect(score_word("wHiMsY")).must_equal 17
     end
 
-    xit 'returns a score of 0 if given an empty input' do
+    it 'returns a score of 0 if given an empty input' do
       expect(score_word("")).must_equal 0
     end
 
-    xit 'adds an extra 8 points if the word is 7 or more characters long' do
+    it 'adds an extra 8 points if the word is 7 or more characters long' do
       expect(score_word("XXXXXXX")).must_equal 64
       expect(score_word("XXXXXXXX")).must_equal 72
       expect(score_word("XXXXXXXXX")).must_equal 80
@@ -90,7 +90,7 @@ describe 'Adagrams' do
       expect(best_word[:score]).must_equal 32
     end
 
-    xit 'accurately finds best scoring word even if not sorted' do
+    it 'accurately finds best scoring word even if not sorted' do
       words = ['XXX', 'XXXX', 'XX', 'X']
       best_word = highest_score_from words
 
@@ -98,7 +98,7 @@ describe 'Adagrams' do
       expect(best_word[:score]).must_equal 32
     end
 
-    xit 'in case of tied score, prefers the word with fewer letters' do
+    it 'in case of tied score, prefers the word with fewer letters' do
       # the character 'M' is worth 3 points, 'W' is 4 points
       words = ['MMMM', 'WWW']
 
@@ -112,7 +112,7 @@ describe 'Adagrams' do
       expect(best_word[:score]).must_equal 12
     end
 
-    xit 'in case of tied score, prefers the word with fewer letters regardless of order' do
+    it 'in case of tied score, prefers the word with fewer letters regardless of order' do
       # the character 'M' is worth 3 points, 'W' is 4 points
       words = ['WWW', 'MMMM']
 
@@ -126,7 +126,7 @@ describe 'Adagrams' do
       expect(best_word[:score]).must_equal 12
     end
 
-    xit 'in case of tied score, prefers most the word with 10 letters' do
+    it 'in case of tied score, prefers most the word with 10 letters' do
       # the character 'A' is worth 1 point, 'B' is 3 points
       words = ['AAAAAAAAAA', 'BBBBBB']
 
@@ -140,7 +140,7 @@ describe 'Adagrams' do
       expect(best_word[:score]).must_equal 18
     end
 
-    xit 'in case of tied score, prefers most the word with 10 letters regardless of order' do
+    it 'in case of tied score, prefers most the word with 10 letters regardless of order' do
       # the character 'A' is worth 1 point, 'B' is 3 points
       words = ['BBBBBB', 'AAAAAAAAAA']
 
@@ -154,18 +154,18 @@ describe 'Adagrams' do
       expect(best_word[:score]).must_equal 18
     end
 
-    xit 'in case of tied score and same length words, prefers the first word' do
+    it 'in case of tied score and same length words, prefers the first word' do
       # the character 'A' is worth 1 point, 'E' is 1 point
-      words = ['AAAAAAAAAA', 'EEEEEEEEEE']
+      words = ['AAAAAAAAA', 'EEEEEEEEE']
 
       # verify both have a score of 10
-      expect(score_word(words.first)).must_equal 18
-      expect(score_word(words.last)).must_equal 18
+      expect(score_word(words.first)).must_equal 17
+      expect(score_word(words.last)).must_equal 17
 
       best_word = highest_score_from words
 
       expect(best_word[:word]).must_equal words.first
-      expect(best_word[:score]).must_equal 18
+      expect(best_word[:score]).must_equal 17
     end
   end
 end
