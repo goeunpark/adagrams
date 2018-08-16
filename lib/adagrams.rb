@@ -83,6 +83,3 @@ def generate_letter_array(pool)
   end
   return letter_array
 end
-
-
-p is_in_english_dict?('0')
