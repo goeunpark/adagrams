@@ -23,21 +23,35 @@ def highest_score_from(unscored_words)
 
   max_words = all_scores.select { |word, score| score == all_scores.values.max }
 
-  first_ten_lettered_word = max_words.select { |word, score| word.length == 10 }.keys[0]
-  first_min_word = max_words.min_by { |word, score| word.length }[0]
+  first_ten_lettered_word = find_first_ten_lettered_word(max_words)
+  first_min_word = find_first_min_word(max_words)
 
-  max_words.any? { |word, score| word.length == 10 } ?
-  first_word = first_ten_lettered_word : first_word = first_min_word
+  any_ten_lettered_word?(max_words) ?
+  winning_word = first_ten_lettered_word : winning_word = first_min_word
 
   first_word_score = max_words.values[0]
 
   best_word = {
-    word: first_word,
+    word: winning_word,
     score: first_word_score
   }
 
   return best_word
-  
+
+end
+
+def any_ten_lettered_word?(max_words)
+max_words.any? { |word, score| word.length == 10 }
+end
+
+def find_first_min_word(max_words)
+  first_min_word = max_words.min_by { |word, score| word.length }[0]
+  return first_min_word
+end
+
+def find_first_ten_lettered_word(max_words)
+  first_ten_lettered_word = max_words.select { |word, score| word.length == 10 }.keys[0]
+  return first_ten_lettered_word
 end
 
 def score_word(word)
