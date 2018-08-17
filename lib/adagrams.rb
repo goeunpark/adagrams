@@ -60,6 +60,19 @@ def find_all_scores(unscored_words)
   return all_scores
 end
 
+def find_max_words(all_scores)
+  all_scores.select { |word, score| score == all_scores.values.max }
+end
+
+def find_all_scores(unscored_words)
+  all_scores = {}
+
+  unscored_words.each do |word|
+    all_scores[word] = score_word(word)
+  end
+  return all_scores
+end
+
 def score_word(word)
   total_points = []
 
