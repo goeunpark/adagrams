@@ -71,11 +71,7 @@ def uses_available_letters?(input, letters_in_hand)
 end
 
 def draw_letters
-  ten_letters = []
-  all_letters = generate_letter_array(POOL)
-  10.times do
-    ten_letters << all_letters.shuffle!.pop
-  end
+  ten_letters = generate_letter_array(POOL).sample(10)
   return ten_letters
 end
 
