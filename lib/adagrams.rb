@@ -1,3 +1,4 @@
+require 'pry'
 require 'csv'
 
 POOL = { A: 9, B: 2, C: 2, D: 4, E: 12, F: 2, G: 3, H: 2, I: 9, J: 1, K: 1, L: 4, M: 2, N: 6, O: 8, P: 2, Q: 1, R: 6, S: 4, T: 6, U: 4, V: 2, W: 2, X: 1, Y: 2, Z: 1 }
@@ -20,7 +21,7 @@ def highest_score_from(unscored_words)
     all_scores[word] = score_word(word)
   end
 
-  max_words = all_scores.select {|word, score| score == all_scores.values.max }
+  max_words = all_scores.select { |word, score| score == all_scores.values.max }
 
   first_word = max_words.keys[0]
   first_word_score = max_words.values[0]
@@ -41,7 +42,7 @@ def highest_score_from(unscored_words)
     }
 
   else
-    first_word = max_words.min_by{ |word, score| word.length }[0]
+    first_word = max_words.min_by { |word, score| word.length }[0]
 
     best_word = {
       word: first_word,
@@ -55,13 +56,9 @@ end
 def score_word(word)
   total_points = []
 
-  SCORE_CHART.each { |letter, letter_points|
-    word.each_char do |char|
-      if char.downcase.include?(letter.to_s.downcase)
-        total_points << letter_points
-      end
-    end
-  }
+  word.each_char do |char|
+    total_points << SCORE_CHART.fetch(char.upcase.to_sym)
+  end
 
   total_points.length >= 7 ? total_points.sum + 8 : total_points.sum
 
